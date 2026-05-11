@@ -9,6 +9,16 @@ Fed/IMF/세계은행 같은 공식기관, Ray Dalio·Howard Marks 등 유명 투
 - **기간별 전망** — 단기(0–6M) / 중기(6–24M) / 장기(2Y+)
 - **거시지표 조건별 시나리오** — IF 금리/CPI/실업률 조건 → THEN 시장 반응
 
+## 수집 채널
+
+| 채널 | 처리 경로 |
+|---|---|
+| YouTube 영상 | `sources/youtube.py` (yt-dlp 메타 + youtube-transcript-api 자막) |
+| Twitter / X 트윗 | `sources/twitter.py` (cdn.syndication.twimg.com 임베드 엔드포인트, 인증 불필요) |
+| PDF 리포트 | `sources/pdf.py` (httpx 다운로드 + pypdf 파싱) |
+| 일반 기사·블로그 | `sources/web.py` (httpx + readability-lxml) |
+| RSS / Atom 피드 | `sources/rss.py` (feedparser, **새 글만** 폴링하는 상태 추적) |
+
 ## 빠른 시작
 
 ```bash
@@ -18,11 +28,15 @@ cp .env.example .env  # 키 채우기
 # 1) Notion에 DB 3종(Sources/Analyses/Scenarios) 생성
 python -m scripts.setup_notion
 
-# 2) 샘플 권위자 3~5건 시드
+# 2) 샘플 권위자 시드
 python -m scripts.seed
 
-# 3) 새 자료 추가 (유튜브, RSS 피드 항목, PDF URL, 일반 웹페이지 지원)
+# 3) 새 자료 추가 (유튜브 / 트윗 / PDF / 웹페이지 지원)
 python -m scripts.add https://www.youtube.com/watch?v=...
+python -m scripts.add https://x.com/RayDalio/status/1234567890
+
+# 4) RSS 피드 + 트위터 RSS 브리지 폴링 (data/sources.yaml 기준, 새 글만 가져옴)
+python -m scripts.poll_feeds
 ```
 
 ## 환경변수

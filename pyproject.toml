@@ -29,6 +29,7 @@ yw103-setup = "scripts.setup_notion:main"
 yw103-add = "scripts.add:main"
 yw103-seed = "scripts.seed:main"
 yw103-ingest = "scripts.ingest:main"
+yw103-poll = "scripts.poll_feeds:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

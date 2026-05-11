@@ -1,5 +1,6 @@
 .env
 .notion_ids.json
+.feed_state.json
 __pycache__/
 *.py[cod]
 *.egg-info/

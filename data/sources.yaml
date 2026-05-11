@@ -1,10 +1,11 @@
-# Curated source list for batch ingestion.
-# Each URL is fed to sources.extract() which auto-detects type (youtube/pdf/web).
-# Use `python -m scripts.ingest` to process the whole list.
+# Sources used by:
+#   scripts.ingest      → 'urls' list (one-shot batch)
+#   scripts.poll_feeds  → 'feeds' + 'twitter_handles' (incremental, state-tracked)
 
+# One-shot URLs to ingest immediately (no state tracking)
 urls: []
 
-# RSS / feed listing (NOT directly ingested — for reference / future enrichment)
+# RSS / Atom feeds — polled by scripts.poll_feeds, only NEW items get ingested
 feeds:
   - name: Federal Reserve press releases
     url: https://www.federalreserve.gov/feeds/press_all.xml
@@ -12,8 +13,14 @@ feeds:
     url: https://www.imf.org/en/News/rss?Language=ENG&series=IMF%20News
   - name: ECB press
     url: https://www.ecb.europa.eu/rss/press.html
+  - name: Oaktree Insights
+    url: https://www.oaktreecapital.com/insights/rss
+  - name: ARK Invest
+    url: https://www.ark-invest.com/feed/
+  - name: BlackRock — Larry Fink letters
+    url: https://www.blackrock.com/corporate/insights/larry-fink-annual-chairmans-letter
 
-# Curated YouTube channel handles (use a video URL when adding via scripts.add)
+# YouTube channels — record handles for reference; ingest specific video URLs via scripts.add
 youtube_channels:
   - "@Federalreserve"
   - "@imf"
@@ -21,3 +28,26 @@ youtube_channels:
   - "@OaktreeCapital"
   - "@Bloomberg"
   - "@CNBC"
+  - "@MarkTilbury"
+  - "@syukaworld"
+
+# Twitter / X handles
+# Direct X polling requires API keys (paid) — for incremental polling, point each
+# handle at an RSS bridge such as a self-hosted Nitter or RSSHub instance.
+# For one-off tweets, just feed the tweet URL to scripts.add (uses syndication endpoint).
+twitter_handles:
+  - name: Bill Ackman
+    handle: BillAckman
+    rss: ""        # e.g. https://nitter.example.com/BillAckman/rss
+  - name: Michael Burry
+    handle: michaeljburry
+    rss: ""
+  - name: Aaron Levie
+    handle: levie
+    rss: ""
+  - name: Cathie Wood
+    handle: CathieDWood
+    rss: ""
+  - name: Ray Dalio
+    handle: RayDalio
+    rss: ""
