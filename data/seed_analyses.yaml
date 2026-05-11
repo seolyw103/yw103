@@ -1,0 +1,180 @@
+# Hand-curated sample entries to seed the Notion DBs on first run.
+# These are illustrative summaries of well-known authority positions and use
+# generic Notion pages instead of live URLs so they don't go stale.
+# Field names map 1:1 to src/yw103/schema.py:AnalysisRecord.
+
+analyses:
+  - title: "FOMC 점도표·기자회견 — 데이터 의존적 신중한 인하 경로"
+    speaker: "Jerome Powell"
+    speaker_type: "공식기관"
+    region: "US"
+    published_at: "2026-03-19"
+    format: "Speech"
+    url: "https://www.federalreserve.gov/newsevents/pressconferences.htm"
+    asset_classes: ["주식", "채권", "외환"]
+    time_horizons: ["단기", "중기"]
+    overall_outlook: "중립"
+    macro_conditions:
+      - "인플레이션 둔화"
+      - "고용 견조"
+      - "연착륙"
+    key_thesis: |
+      디스인플레이션은 진행 중이지만 마지막 1마일은 험난하다. 노동시장이 견조한 한 서두를 이유가 없으며,
+      금리 인하는 데이터 의존적으로 단계적으로 진행할 것. 인하 폭과 시기에 대한 사전 약속은 하지 않는다.
+    time_period_view:
+      short: "다음 회의는 동결 가능성을 열어두며, 인플레 재가속 시 인하 보류."
+      mid: "근원 PCE가 2%대로 안정되면 점진적 인하 — 연 2회 수준."
+      long: "장기 중립금리는 과거보다 다소 높을 수 있다."
+    asset_recommendations: ""
+    confidence: "중간"
+    scenarios:
+      - name: "인플레 재가속 → 인하 보류"
+        triggers: ["근원 CPI", "임금 상승률"]
+        horizon: ["단기"]
+        asset_reactions:
+          - asset: "주식"
+            direction: "약세"
+            rationale: "할인율 상승"
+          - asset: "채권"
+            direction: "약세"
+            rationale: "장기 금리 재상승"
+        notes: ""
+      - name: "디스인플레 지속 → 점진적 인하"
+        triggers: ["근원 PCE 둔화", "실업률 상승"]
+        horizon: ["중기"]
+        asset_reactions:
+          - asset: "주식"
+            direction: "강세"
+          - asset: "채권"
+            direction: "강세"
+
+  - title: "Principles for the Changing World Order — 부채 사이클과 강대국 경쟁"
+    speaker: "Ray Dalio"
+    speaker_type: "투자자"
+    region: "Global"
+    published_at: "2026-02-10"
+    format: "Article"
+    url: "https://www.linkedin.com/in/raydalio/"
+    asset_classes: ["주식", "채권", "원자재", "외환", "현금"]
+    time_horizons: ["중기", "장기"]
+    overall_outlook: "약세"
+    macro_conditions:
+      - "부채 부담 확대"
+      - "재정 우위"
+      - "통화 약세 압력"
+      - "지정학 긴장"
+    key_thesis: |
+      장기 부채 사이클의 후반부에 진입했다. 미국 재정적자와 부채 발행이 명목금리를 누르기 위한 재정·통화
+      혼합 정책을 강제할 것이며, 결과적으로 명목채권의 실질가치는 훼손된다. 분산된 포트폴리오와 실물자산 비중을 권한다.
+    time_period_view:
+      short: ""
+      mid: "장기금리 재상승 시 위험자산 변동성 확대."
+      long: "달러 기축 약화는 점진적이지만 추세적. 금·원자재·중국 외 신흥국 통화 비중 확대."
+    asset_recommendations: |
+      장기 명목채권 비중 축소, 금/원자재 비중 확대, 미·중·인도 등 다극화 노출, 다양한 통화·자산 분산.
+    confidence: "높음"
+    scenarios:
+      - name: "재정 우위 → 명목채권 실질가치 훼손"
+        triggers: ["재정적자/GDP", "장기금리"]
+        horizon: ["장기"]
+        asset_reactions:
+          - asset: "채권"
+            direction: "약세"
+            rationale: "실질금리 억제용 재정·통화 혼합"
+          - asset: "원자재"
+            direction: "강세"
+            rationale: "통화가치 헤지"
+          - asset: "현금"
+            direction: "약세"
+
+  - title: "World Economic Outlook — 회복은 이어지나 하방 위험 누적"
+    speaker: "IMF"
+    speaker_type: "공식기관"
+    region: "Global"
+    published_at: "2026-04-16"
+    format: "Report"
+    url: "https://www.imf.org/en/Publications/WEO"
+    asset_classes: ["주식", "채권", "외환"]
+    time_horizons: ["중기"]
+    overall_outlook: "중립"
+    macro_conditions:
+      - "성장 둔화"
+      - "인플레이션 점진적 둔화"
+      - "지정학 분절화"
+      - "신흥국 자본유출 위험"
+    key_thesis: |
+      세계 성장률은 잠재성장률을 하회하는 수준에서 안정화. 선진국은 디스인플레이션 막바지 국면이며,
+      신흥국은 자본유출과 부채부담에 노출. 무역 분절화는 중기 생산성에 부정적.
+    time_period_view:
+      mid: "선진국 2~3% 성장, 신흥국 4%대 수렴. 인플레는 목표 부근."
+    asset_recommendations: ""
+    confidence: "중간"
+    scenarios: []
+
+  - title: "Memo: Sea Change — 저금리 시대의 종료"
+    speaker: "Howard Marks"
+    speaker_type: "투자자"
+    region: "US"
+    published_at: "2026-01-08"
+    format: "Article"
+    url: "https://www.oaktreecapital.com/insights/memos"
+    asset_classes: ["채권", "주식"]
+    time_horizons: ["장기"]
+    overall_outlook: "중립"
+    macro_conditions:
+      - "고금리 정상화"
+      - "신용 스프레드 확대"
+    key_thesis: |
+      0% 금리 시대는 끝났다. 향후 10년의 평균 자금조달비용은 과거보다 명백히 높을 것.
+      이는 위험자산 가격결정과 자본구조 전반에 구조적 영향을 미친다. 신용시장(특히 비투자등급, 사모대출)에 비대칭적 기회.
+    time_period_view:
+      long: "고금리 환경의 정상화. 신용·private credit 비중 확대 유리."
+    asset_recommendations: |
+      퀄리티 채권, 사모대출, 디스트레스트 신용 비중 확대. 고PER 성장주 비중 축소.
+    confidence: "높음"
+    scenarios:
+      - name: "고금리 정상화 지속"
+        triggers: ["장기 명목금리", "신용 스프레드"]
+        horizon: ["장기"]
+        asset_reactions:
+          - asset: "채권"
+            direction: "강세"
+            rationale: "캐리 매력"
+          - asset: "주식"
+            direction: "중립"
+            rationale: "밸류에이션 재평가"
+
+  - title: "글로벌 매크로 리뷰 — 한국 투자자의 관점"
+    speaker: "김단테"
+    speaker_type: "유튜브채널"
+    region: "KR"
+    published_at: "2026-04-22"
+    format: "Video"
+    url: "https://www.youtube.com/@kimdante"
+    asset_classes: ["주식", "원자재", "외환", "암호화폐"]
+    time_horizons: ["단기", "중기"]
+    overall_outlook: "중립"
+    macro_conditions:
+      - "달러 약세 전환 가능"
+      - "AI 자본지출 사이클"
+    key_thesis: |
+      Fed 인하 사이클 진입과 AI 설비투자 사이클이 겹치는 구간. 미국 빅테크 집중도가 높지만, 달러 약세 전환 시
+      신흥국·원자재·금에 자금이 이동할 수 있음. 한국 시장은 반도체 사이클과 환율에 동시 노출.
+    time_period_view:
+      short: "변동성 확대. 빅테크 실적·환율이 단기 방향성 좌우."
+      mid: "달러 약세 시 신흥국·원자재 비중 확대 유효."
+    asset_recommendations: |
+      미국 주식 집중 완화, 금·원자재 비중 일부 확대, 한국 반도체 비중 유지하되 환헤지 고려.
+    confidence: "중간"
+    scenarios:
+      - name: "달러 약세 전환"
+        triggers: ["Fed 인하", "미·중 경상수지"]
+        horizon: ["중기"]
+        asset_reactions:
+          - asset: "원자재"
+            direction: "강세"
+          - asset: "암호화폐"
+            direction: "강세"
+          - asset: "외환"
+            direction: "약세"
+            rationale: "달러 약세 = 비달러 통화 강세"
