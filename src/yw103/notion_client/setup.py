@@ -118,4 +118,113 @@ def setup_databases() -> dict[str, str]:
         )
 
     save_notion_ids(ids)
+
+    setup_views(parent, ids["analyses_db"])
+
     return ids
+
+
+VIEWS_MARKER = "📑 분석 뷰 (Group by 설정 안내)"
+
+VIEW_SPECS = [
+    ("📊 자산군별 컨센서스", "Asset Classes", "주식·채권·원자재 등 자산군별로 그룹핑"),
+    ("⏱ 기간별 전망", "Time Horizon", "단기·중기·장기로 그룹핑"),
+    ("🌍 지역별 전망", "Source", "Source의 Region 속성으로 필터/그룹핑"),
+    ("📈 강세 vs 약세", "Overall Outlook", "강세·중립·약세로 그룹핑"),
+]
+
+
+def _has_views_marker(parent_page_id: str) -> bool:
+    notion = get_client()
+    cursor = None
+    while True:
+        resp = (
+            notion.blocks.children.list(block_id=parent_page_id, start_cursor=cursor)
+            if cursor
+            else notion.blocks.children.list(block_id=parent_page_id)
+        )
+        for block in resp.get("results", []):
+            if block.get("type") == "heading_1":
+                rt = block["heading_1"].get("rich_text", [])
+                text = "".join(seg.get("plain_text", "") for seg in rt)
+                if VIEWS_MARKER in text:
+                    return True
+        if not resp.get("has_more"):
+            return False
+        cursor = resp.get("next_cursor")
+
+
+def setup_views(parent_page_id: str, analyses_db_id: str) -> None:
+    """Scaffold a 'Views' section on the parent page.
+
+    Notion's API can't preconfigure filter/sort/group on linked database views,
+    so this only lays down a heading + link_to_database + instruction per view.
+    The user opens each linked DB and applies the suggested grouping (~5s/view).
+    Idempotent: skips if the section heading already exists.
+    """
+    if _has_views_marker(parent_page_id):
+        return
+
+    children: list[dict] = [
+        {"object": "block", "type": "divider", "divider": {}},
+        {
+            "object": "block",
+            "type": "heading_1",
+            "heading_1": {"rich_text": [{"type": "text", "text": {"content": VIEWS_MARKER}}]},
+        },
+        {
+            "object": "block",
+            "type": "paragraph",
+            "paragraph": {
+                "rich_text": [
+                    {
+                        "type": "text",
+                        "text": {
+                            "content": (
+                                "아래 각 링크는 Analyses DB를 가리킵니다. 처음 열어서 "
+                                "View 옵션 → Group by → 추천 필드를 한 번만 설정하면 끝."
+                            )
+                        },
+                    }
+                ]
+            },
+        },
+    ]
+    for title, group_by, desc in VIEW_SPECS:
+        children.extend(
+            [
+                {
+                    "object": "block",
+                    "type": "heading_2",
+                    "heading_2": {
+                        "rich_text": [
+                            {
+                                "type": "text",
+                                "text": {
+                                    "content": f"{title}  —  Group by: {group_by}"
+                                },
+                            }
+                        ]
+                    },
+                },
+                {
+                    "object": "block",
+                    "type": "paragraph",
+                    "paragraph": {
+                        "rich_text": [
+                            {"type": "text", "text": {"content": desc}}
+                        ]
+                    },
+                },
+                {
+                    "object": "block",
+                    "type": "link_to_page",
+                    "link_to_page": {
+                        "type": "database_id",
+                        "database_id": analyses_db_id,
+                    },
+                },
+            ]
+        )
+
+    get_client().blocks.children.append(block_id=parent_page_id, children=children)
