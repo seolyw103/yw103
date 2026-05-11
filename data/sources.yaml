@@ -1,0 +1,23 @@
+# Curated source list for batch ingestion.
+# Each URL is fed to sources.extract() which auto-detects type (youtube/pdf/web).
+# Use `python -m scripts.ingest` to process the whole list.
+
+urls: []
+
+# RSS / feed listing (NOT directly ingested — for reference / future enrichment)
+feeds:
+  - name: Federal Reserve press releases
+    url: https://www.federalreserve.gov/feeds/press_all.xml
+  - name: IMF news
+    url: https://www.imf.org/en/News/rss?Language=ENG&series=IMF%20News
+  - name: ECB press
+    url: https://www.ecb.europa.eu/rss/press.html
+
+# Curated YouTube channel handles (use a video URL when adding via scripts.add)
+youtube_channels:
+  - "@Federalreserve"
+  - "@imf"
+  - "@RayDalio"
+  - "@OaktreeCapital"
+  - "@Bloomberg"
+  - "@CNBC"
