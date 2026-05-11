@@ -1,4 +1,4 @@
-"""Idempotent Notion database setup under the parent "경제 분석" page.
+"""Idempotent Notion database setup under the parent "economic" page.
 
 Creates three linked databases: Sources, Analyses, Scenarios.
 Caches generated IDs in `.notion_ids.json` at repo root.

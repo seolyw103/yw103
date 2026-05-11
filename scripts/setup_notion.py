@@ -1,5 +1,5 @@
 """Create three databases (Sources/Analyses/Scenarios) under the parent
-"경제 분석" page. Idempotent — re-running detects existing DBs by title.
+"economic" page. Idempotent — re-running detects existing DBs by title.
 """
 from __future__ import annotations
 

@@ -33,7 +33,7 @@ python -m scripts.add https://www.youtube.com/watch?v=...
 | `ANTHROPIC_API_KEY` / `ANTHROPIC_MODEL` | Claude 사용 시 (기본 모델: `claude-sonnet-4-6`) |
 | `OPENAI_API_KEY` / `OPENAI_MODEL` | OpenAI 사용 시 (기본 모델: `gpt-4o`) |
 | `NOTION_TOKEN` | Notion integration 토큰 |
-| `NOTION_PARENT_PAGE_ID` | 기존 "경제 분석" 페이지 ID |
+| `NOTION_PARENT_PAGE_ID` | 기존 "economic" 페이지 ID |
 
 ## 구조
 
