@@ -61,10 +61,11 @@ def _analyses_props(sources_db_id: str) -> dict[str, Any]:
         "Format": {"select": {"options": _select_opts(
             ["Video", "Speech", "Report", "Article", "Podcast"]
         )}},
-        "URL": {"url": {}},
+        "Link": {"url": {}},
         "Asset Classes": {"multi_select": {"options": _select_opts(AssetClass)}},
         "Time Horizon": {"multi_select": {"options": _select_opts(TimeHorizon)}},
         "Overall Outlook": {"select": {"options": _select_opts(Outlook)}},
+        "Region": {"select": {"options": _select_opts(Region)}},
         "Macro Conditions": {"multi_select": {"options": []}},  # free-form
         "Key Thesis": {"rich_text": {}},
         "Time-period View": {"rich_text": {}},
@@ -119,8 +120,6 @@ def setup_databases() -> dict[str, str]:
 
     save_notion_ids(ids)
 
-    setup_views(parent, ids["analyses_db"])
-
     return ids
 
 
@@ -129,7 +128,7 @@ VIEWS_MARKER = "📑 분석 뷰 (Group by 설정 안내)"
 VIEW_SPECS = [
     ("📊 자산군별 컨센서스", "Asset Classes", "주식·채권·원자재 등 자산군별로 그룹핑"),
     ("⏱ 기간별 전망", "Time Horizon", "단기·중기·장기로 그룹핑"),
-    ("🌍 지역별 전망", "Source", "Source의 Region 속성으로 필터/그룹핑"),
+    ("🌍 지역별 전망", "Region", "US·EU·KR·China·Global로 그룹핑"),
     ("📈 강세 vs 약세", "Overall Outlook", "강세·중립·약세로 그룹핑"),
 ]
 
