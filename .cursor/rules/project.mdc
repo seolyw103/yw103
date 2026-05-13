@@ -1,0 +1,33 @@
+---
+description: yw103 project conventions for any agent working in this repo
+alwaysApply: true
+---
+
+# yw103 — Agent Conventions
+
+This repo collects authoritative economic-market analyses (Fed/IMF, Ray Dalio, KR YouTube channels, etc.) and writes structured records to Notion.
+
+## Stack
+- Python 3.10+ (`pyproject.toml`)
+- LLM adapters: Anthropic Claude (default `claude-sonnet-4-6`) and OpenAI
+- Pydantic v2 schema in `src/yw103/schema.py`
+- Notion via `notion-client`
+- Sources: `src/yw103/sources/{youtube,twitter,pdf,web,rss}.py`
+
+## House rules
+- Korean prompts and Korean-language analysis output are intentional — do not translate them to English.
+- Three analysis axes are load-bearing: **자산군별 / 기간별 / 거시지표 시나리오**. Don't drop or rename them.
+- RSS poller (`scripts.poll_feeds`) must remain "new items only" — never re-emit already-seen entries.
+- Twitter source uses the public `cdn.syndication.twimg.com` embed endpoint; no auth.
+- Don't add new third-party services (paid APIs, vector DBs, etc.) without being asked.
+
+## Style
+- Match existing file structure: extractors in `sources/`, prompts in `prompts.py`, pipeline orchestration in `pipeline.py`.
+- Prefer `httpx` over `requests`.
+- Keep CLI entrypoints under `scripts/` and register them in `[project.scripts]`.
+- No new comments unless the *why* is non-obvious.
+
+## What to verify before reporting "done"
+- `pip install -e .` succeeds.
+- Touched scripts at minimum import without error: `python -c "import scripts.<name>"`.
+- If you changed schema, also update `setup_notion.py` so DB columns stay in sync.
