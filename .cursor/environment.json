@@ -1,5 +1,0 @@
-{
-  "install": "pip install -e .",
-  "start": "echo 'yw103 cloud agent ready'",
-  "terminals": []
-}
