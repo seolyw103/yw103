@@ -1,13 +1,4 @@
-# Secrets / credentials
 .env
-.env.*
-!.env.example
-*.token
-secrets.*
-credentials.*
-*.pem
-*.key
-
 .notion_ids.json
 .feed_state.json
 __pycache__/
